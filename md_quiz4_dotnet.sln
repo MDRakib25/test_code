@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "md_quiz4_dotnet", "md_quiz4_dotnet\md_quiz4_dotnet.csproj", "{897D22BE-EBBE-4973-B6E2-02ED3545D886}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "md_quiz4_dotnet.Tests", "md_quiz4_dotnet.Tests\md_quiz4_dotnet.Tests.csproj", "{38F28ADF-C664-4931-B8E8-9639A63CBF1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{897D22BE-EBBE-4973-B6E2-02ED3545D886}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{897D22BE-EBBE-4973-B6E2-02ED3545D886}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{897D22BE-EBBE-4973-B6E2-02ED3545D886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F28ADF-C664-4931-B8E8-9639A63CBF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F28ADF-C664-4931-B8E8-9639A63CBF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F28ADF-C664-4931-B8E8-9639A63CBF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F28ADF-C664-4931-B8E8-9639A63CBF1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

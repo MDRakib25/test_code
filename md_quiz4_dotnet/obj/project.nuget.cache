@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "GqMDbilRBs7lMCsn7fPYwSk7uKwot89bgsmw1gf77EkeyEUfvEmy5GgmgATRN1bRN2TCPDOyXN4GeQ4qyvO7qQ==",
+  "dgSpecHash": "h7n4fq6E7YWkE3hVjWnGxTebIBrmiFVuZ6EgpqqHzJiEUNP7l82ezkAUcV6I2sOAK3s/cmoJmfbnG7tXWfV5wQ==",
   "success": true,
   "projectFilePath": "D:\\md__quiz4_dotnet-main\\md__quiz4_dotnet-main\\md_quiz4_dotnet\\md_quiz4_dotnet.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\najmu\\.nuget\\packages\\microsoft.codeanalysis.netanalyzers\\7.0.0\\microsoft.codeanalysis.netanalyzers.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
