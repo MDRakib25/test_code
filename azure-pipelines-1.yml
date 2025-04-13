@@ -1,0 +1,57 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  name: 'Default'  # Replace with your self-hosted agent name
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+# ✅ Use .NET SDK
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'  # You're using .NET 8
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+# ✅ Restore and Build (Runs Roslyn analyzers automatically)
+- script: |
+    dotnet restore
+    dotnet build --no-incremental --configuration $(buildConfiguration) -warnaserror
+  displayName: 'Build the project with analyzers'
+
+# ✅ Run Unit Tests and Collect Coverage (from test project)
+- script: |
+    dotnet test md_quiz4_dotnet.Tests/md_quiz4_dotnet.Tests.csproj --configuration $(buildConfiguration) --collect:"XPlat Code Coverage"
+  displayName: 'Run Unit Tests + Collect Coverage'
+
+# ✅ Publish Test Results to Azure DevOps UI
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/TestResults/*.trx'
+    testRunTitle: 'Unit Test Results'
+
+# ✅ Publish Code Coverage Results to Azure DevOps UI
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+    reportDirectory: '$(Agent.TempDirectory)'
+
+# ✅ Publish the App (main project)
+- script: |
+    dotnet publish md_quiz4_dotnet/md_quiz4_dotnet.csproj -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish the project'
+
+# ✅ Upload Build Artifacts
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'mvc_app'
+    publishLocation: 'Container'
