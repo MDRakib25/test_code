@@ -7,27 +7,33 @@ trigger:
 - main
 
 pool:
-  name: 'Default'  # Use your self-hosted agent
+  name: 'Default'  # Your self-hosted agent
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
+# ✅ Install .NET SDK
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '7.0.x'  # Make sure this matches your installed SDK version
+    version: '7.0.x'
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'Build the project'
+# ✅ Restore and Build (with Analyzers)
+- script: |
+    dotnet restore
+    dotnet build --no-incremental --configuration $(buildConfiguration) -warnaserror
+  displayName: 'Build the project with analyzers (fail on warnings)'
 
-- script: dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
+# ✅ Publish the app
+- script: |
+    dotnet publish -c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)
   displayName: 'Publish the project'
 
+# ✅ Upload build artifacts
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'mvc_app'
     publishLocation: 'Container'
-
